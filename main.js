@@ -14,7 +14,7 @@ const randomBtn = $(".btn-random");
 const repeatBtn = $(".btn-repeat");
 const playlist = $(".playlist");
 const app = {
-    currentIndex: JSON.parse(localStorage.getItem("currentIndex")),
+    currentIndex: JSON.parse(localStorage.getItem("currentIndex")) || 0,
     isPlaying: false,
     isRandom: JSON.parse(localStorage.getItem("isRandom")),
     isRepeat: JSON.parse(localStorage.getItem("isRepeat")),
