@@ -7,7 +7,7 @@ const heading = $("header h2");
 const cdThumb = $(".cd-thumb");
 const audio = $("#audio");
 const playBtn = $(".btn-toggle-play");
-const progress = $("#progress");
+const progress = document.getElementById("progress");
 const prevBtn = $(".btn-prev");
 const nextBtn = $(".btn-next");
 const randomBtn = $(".btn-random");
@@ -97,6 +97,7 @@ const app = {
 
     handleEvent: function () {
         const _this = this;
+        let seeking = false;
         // CD Rotating
         const cdThumbAnimate = cdThumb.animate(
             [{ transform: "rotate(360deg)" }],
@@ -143,10 +144,18 @@ const app = {
 
         audio.addEventListener("ended", _this.handleEndSong);
 
-        progress.addEventListener("click", function (e) {
-            const percentage = (e.offsetX / this.offsetWidth) * 100;
-            audio.currentTime = (audio.duration / 100) * percentage;
-        });
+        progress.addEventListener("click", seek);
+
+        progress.addEventListener("change", seek);
+
+        function seek(event) {
+            // progress.value = e.clientX - progress.offsetLeft;
+            // audio.currentTime = audio.duration * (progress.value / 100);
+            // const percentage = (event.offsetX / this.offsetWidth) * 100;
+            console.log(event);
+            audio.currentTime = (audio.duration / 100) * this.valueAsNumber;
+            console.log("helo");
+        }
 
         nextBtn.addEventListener("click", _this.nextSong);
         prevBtn.addEventListener("click", _this.prevSong);
